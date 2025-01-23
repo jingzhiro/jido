@@ -1,0 +1,9 @@
+Maximal munch - in the scanner class, more specifically the switch cases for tokens, we do not implement it as 
+
+case 'o':
+  if (match('r')) {
+    addToken(OR);
+  }
+  break;
+
+because the scanner could potentially emit an or keyword token immediately, even if it was part of a variable (e.g. var named orchid). Instead, we assume any lexeme stating with a letter or underscore is an identifier until further notice.
