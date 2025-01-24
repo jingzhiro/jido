@@ -61,6 +61,23 @@ class Scanner {
         if (match('/')) {
           // A comment goes until the end of the line.
           while (peek() != '\n' && !isAtEnd()) advance();
+        } else if (match('*')) {
+          // May be erroneous.
+          while (!isAtEnd()) {
+            if (peek() == '\n') line++;
+            
+            if (peek() == '*' && peekNext() == '/') {
+                advance(); // Consume '*'
+                advance(); // Consume '/'
+                break;
+            } else if (peekNext() == '\0') {
+              Lox.error(line, "Unterminated block comment.");
+            }
+            advance();
+          }
+
+          // if (isAtEnd() && (peek() != '*' || peekNext() != '/')) 
+          //   Lox.error(line, "Unterminated block comment.");
         } else {
 					// This makes sure we can still perform division.
           addToken(SLASH);
