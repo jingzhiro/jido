@@ -75,9 +75,6 @@ class Scanner {
             }
             advance();
           }
-
-          // if (isAtEnd() && (peek() != '*' || peekNext() != '/')) 
-          //   Lox.error(line, "Unterminated block comment.");
         } else {
 					// This makes sure we can still perform division.
           addToken(SLASH);

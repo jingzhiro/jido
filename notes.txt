@@ -7,3 +7,14 @@ case 'o':
   break;
 
 because the scanner could potentially emit an or keyword token immediately, even if it was part of a variable (e.g. var named orchid). Instead, we assume any lexeme stating with a letter or underscore is an identifier until further notice.
+
+GRAMMAR
+expression     → equality ;
+equality       → comparison ( ( "!=" | "==" ) comparison )* ;
+comparison     → term ( ( ">" | ">=" | "<" | "<=" ) term )* ;
+term           → factor ( ( "-" | "+" ) factor )* ;
+factor         → unary ( ( "/" | "*" ) unary )* ;
+unary          → ( "!" | "-" ) unary
+               | primary ;
+primary        → NUMBER | STRING | "true" | "false" | "nil"
+               | "(" expression ")" ;
