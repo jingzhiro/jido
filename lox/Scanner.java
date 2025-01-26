@@ -33,6 +33,7 @@ class Scanner {
   private void scanToken() {
     char c = advance();
     switch (c) {
+      // Single character tokens
       case '(': addToken(LEFT_PAREN); break;
       case ')': addToken(RIGHT_PAREN); break;
       case '{': addToken(LEFT_BRACE); break;
@@ -43,7 +44,10 @@ class Scanner {
       case '+': addToken(PLUS); break;
       case ';': addToken(SEMICOLON); break;
       case '*': addToken(STAR); break;
+      case '?': addToken(QUESTION); break;
+      case ':': addToken(COLON); break;
 
+      // Paired tokens, requires case matching.
       case '!':
         addToken(match('=') ? BANG_EQUAL : BANG);
         break;
@@ -62,7 +66,7 @@ class Scanner {
           // A comment goes until the end of the line.
           while (peek() != '\n' && !isAtEnd()) advance();
         } else if (match('*')) {
-          // May be erroneous.
+          // Block comment implementation.
           while (!isAtEnd()) {
             if (peek() == '\n') line++;
             
