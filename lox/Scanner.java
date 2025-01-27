@@ -41,13 +41,20 @@ class Scanner {
       case ',': addToken(COMMA); break;
       case '.': addToken(DOT); break;
       case '-': addToken(MINUS); break;
-      case '+': addToken(PLUS); break;
       case ';': addToken(SEMICOLON); break;
       case '*': addToken(STAR); break;
       case '?': addToken(QUESTION); break;
       case ':': addToken(COLON); break;
 
       // Paired tokens, requires case matching.
+      case '+': 
+        if (match('+')) {
+          addToken(INCREMENT);
+        } else {
+          addToken(PLUS); 
+        }
+
+        break;
       case '!':
         addToken(match('=') ? BANG_EQUAL : BANG);
         break;
@@ -60,7 +67,6 @@ class Scanner {
       case '>':
         addToken(match('=') ? GREATER_EQUAL : GREATER);
         break;
-
       case '/':
         if (match('/')) {
           // A comment goes until the end of the line.

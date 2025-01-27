@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 
+// Helper class to generate AST files.
 public class GenerateAst {
   public static void main(String[] args) throws IOException {
     if (args.length != 1) {
@@ -13,11 +14,24 @@ public class GenerateAst {
     }
     String outputDir = args[0];
     defineAst(outputDir, "Expr", Arrays.asList(
+		"Assign : Token name, Expr value",
 			"Binary   : Expr left, Token operator, Expr right",
 			"Grouping : Expr expression",
 			"Literal  : Object value",
-			"Unary    : Token operator, Expr right"
+			"Logical  : Expr left, Token operator, Expr right",
+			"Unary    : Token operator, Expr right",
+			"Ternary  : Expr condition, Expr then, Expr otherwise",
+			"Variable : Token name"
     ));
+
+	defineAst(outputDir, "Stmt", Arrays.asList(
+		"Block : List<Stmt> statements",
+		"Expression : Expr expression",
+		"If         : Expr condition, Stmt thenBranch, Stmt elseBranch",
+		"Print      : Expr expression",
+		"Var        : Token name, Expr initializer",
+		"While      : Expr condition, Stmt body"
+	  ));
   }
 
   private static void defineAst(
