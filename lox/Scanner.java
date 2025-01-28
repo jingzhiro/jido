@@ -40,20 +40,26 @@ class Scanner {
       case '}': addToken(RIGHT_BRACE); break;
       case ',': addToken(COMMA); break;
       case '.': addToken(DOT); break;
-      case '-': addToken(MINUS); break;
       case ';': addToken(SEMICOLON); break;
       case '*': addToken(STAR); break;
       case '?': addToken(QUESTION); break;
       case ':': addToken(COLON); break;
+      case '%': addToken(MODOLO); break;
 
       // Paired tokens, requires case matching.
       case '+': 
         if (match('+')) {
           addToken(INCREMENT);
         } else {
-          addToken(PLUS); 
+          addToken(PLUS);
         }
-
+        break;
+      case '-':
+        if (match('-')) {
+          addToken(DECREMENT);
+        } else {
+          addToken(MINUS);
+        }
         break;
       case '!':
         addToken(match('=') ? BANG_EQUAL : BANG);

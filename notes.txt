@@ -18,3 +18,5 @@ unary          → ( "!" | "-" ) unary
                | primary ;
 primary        → NUMBER | STRING | "true" | "false" | "nil"
                | "(" expression ")" ;
+
+By using different environments when we execute the body, calls to the same function with the same code can produce different results.

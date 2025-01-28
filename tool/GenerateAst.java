@@ -16,10 +16,12 @@ public class GenerateAst {
     defineAst(outputDir, "Expr", Arrays.asList(
 		"Assign : Token name, Expr value",
 			"Binary   : Expr left, Token operator, Expr right",
+			"Call     : Expr callee, Token paren, List<Expr> arguments",
 			"Grouping : Expr expression",
 			"Literal  : Object value",
 			"Logical  : Expr left, Token operator, Expr right",
 			"Unary    : Token operator, Expr right",
+			"Postfix  : Expr left, Token operator",
 			"Ternary  : Expr condition, Expr then, Expr otherwise",
 			"Variable : Token name"
     ));
@@ -27,6 +29,7 @@ public class GenerateAst {
 	defineAst(outputDir, "Stmt", Arrays.asList(
 		"Block : List<Stmt> statements",
 		"Expression : Expr expression",
+		"Function   : Token name, List<Token> params, List<Stmt> body",
 		"If         : Expr condition, Stmt thenBranch, Stmt elseBranch",
 		"Print      : Expr expression",
 		"Var        : Token name, Expr initializer",
@@ -54,7 +57,7 @@ public class GenerateAst {
 			String className = type.split(":")[0].trim();
 			String fields = type.split(":")[1].trim(); 
 			defineType(writer, baseName, className, fields);
-		}
+			}
 
 		// The base accept() method.
 		writer.println();
@@ -105,11 +108,11 @@ public class GenerateAst {
 	) {
     writer.println("  interface Visitor<R> {");
 
-    for (String type : types) {
-      String typeName = type.split(":")[0].trim();
-      writer.println("    R visit" + typeName + baseName + "(" +
-          typeName + " " + baseName.toLowerCase() + ");");
-    }
+		for (String type : types) {
+			String typeName = type.split(":")[0].trim();
+			writer.println("    R visit" + typeName + baseName + "(" +
+					typeName + " " + baseName.toLowerCase() + ");");
+		}
 
     writer.println("  }");
   }
