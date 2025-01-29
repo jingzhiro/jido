@@ -1,4 +1,4 @@
-package lox;
+package jido;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package lox;
+package jido;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 	private Environment environment = globals;
 
 	Interpreter() {
-		globals.define("clock", new LoxCallable() {
+		globals.define("clock", new JidoCallable() {
 			@Override
 			public int arity() { return 0; }
 
@@ -29,7 +29,7 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
         execute(statement);
       }
     } catch (RuntimeError error) {
-      Lox.runtimeError(error);
+      Jido.runtimeError(error);
     }
   }
 
@@ -160,8 +160,8 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 
 	@Override
   public Void visitFunctionStmt(Stmt.Function stmt) {
-		// When creating a LoxFunction, the current environment is captured and parameterised.
-    LoxFunction function = new LoxFunction(stmt, environment);
+		// When creating a JidoFunction, the current environment is captured and parameterised.
+    JidoFunction function = new JidoFunction(stmt, environment);
     environment.define(stmt.name.lexeme, function);
     return null;
   }
@@ -227,11 +227,11 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void> {
 		}
 
 		// Ensures the callee can be called.
-		if (!(callee instanceof LoxCallable)) {
+		if (!(callee instanceof JidoCallable)) {
 			throw new RuntimeError(expr.paren, "Can only call functions and classes.");
 		}
 
-		LoxCallable function = (LoxCallable)callee;
+		JidoCallable function = (JidoCallable)callee;
 		if (arguments.size() != function.arity()) {
 			throw new RuntimeError(expr.paren, "Expected " + function.arity() + " arguments bot got " + arguments.size() + ".");
 		}

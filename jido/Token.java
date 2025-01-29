@@ -1,4 +1,4 @@
-package lox;
+package jido;
 
 class Token {
     final TokenType type;

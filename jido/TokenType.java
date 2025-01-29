@@ -1,4 +1,4 @@
-package lox;
+package jido;
 
 enum TokenType {
     // Single-character tokens.

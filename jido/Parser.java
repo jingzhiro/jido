@@ -1,10 +1,10 @@
-package lox;
+package jido;
+
+import static jido.TokenType.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static lox.TokenType.*;
 
 /* Works by calling methods from highest precedence (primary) to lowest precedence (expression). Essentially, resolves the expressions backwards from a primary, e.g., the parser looks for a ternary, if a '?' is not matched, it tries equality to look for '==' or '!=', eventually working its way down to the base case (primary). */
 class Parser {
@@ -431,7 +431,7 @@ class Parser {
   }
 
 	private ParseError error(Token token, String message) {
-    Lox.error(token, message);
+    Jido.error(token, message);
     return new ParseError();
   }
 }

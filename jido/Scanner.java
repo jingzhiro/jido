@@ -1,11 +1,11 @@
-package lox;
+package jido;
+
+import static jido.TokenType.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static lox.TokenType.*;
 
 class Scanner {
   private final String source;
@@ -87,7 +87,7 @@ class Scanner {
                 advance(); // Consume '/'
                 break;
             } else if (peekNext() == '\0') {
-              Lox.error(line, "Unterminated block comment.");
+              Jido.error(line, "Unterminated block comment.");
             }
             advance();
           }
@@ -117,7 +117,7 @@ class Scanner {
 				} else if (isAlpha(c)) {
 					identifier();
 				} else {
-					Lox.error(line, "Unexpected character.");
+					Jido.error(line, "Unexpected character.");
 					break;
 				}
     }
@@ -166,7 +166,7 @@ class Scanner {
 		}
 
 		if (isAtEnd()) {
-			Lox.error(line, "Unterminated string.");
+			Jido.error(line, "Unterminated string.");
 			return;
 		}
 

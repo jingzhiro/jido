@@ -1,4 +1,4 @@
-package lox;
+package jido;
 
 // Currently unused.
 public class BreakException extends RuntimeException {

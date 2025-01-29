@@ -1,12 +1,12 @@
-package lox;
+package jido;
 
 import java.util.List;
 
-public class LoxFunction implements LoxCallable {
+public class JidoFunction implements JidoCallable {
     private final Stmt.Function declaration;
 		private final Environment closure;
 
-    LoxFunction(Stmt.Function declaration, Environment closure) {
+    JidoFunction(Stmt.Function declaration, Environment closure) {
 			this.closure = closure;
 			this.declaration = declaration;
     }

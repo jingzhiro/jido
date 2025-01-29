@@ -1,4 +1,4 @@
-package lox;
+package jido;
 
 public class RuntimeError extends RuntimeException {
 	final Token token;
